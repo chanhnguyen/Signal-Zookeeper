@@ -8,7 +8,6 @@
 
 set :application, "zookeeper"
 set :use_sudo, false
-set :runner, "cnguyen"
 set :stage, :production
 
 
@@ -29,13 +28,13 @@ set :copy_strategy, :export
 set :copy_cache, true
 
 set :deploy_to, "/opt/apps/#{application}"
-set :domain, "cnguyen-md.linkedin.biz"
+set :domain, "cnguyen-md"
 # ssh_options[:forward_agent] = true
 
 #========================
 # ROLES
 #========================
-role :node, domain
+role :node, "cnguyen-md", "hyan-md"
 
 #========================
 # CUSTOM
@@ -48,6 +47,7 @@ namespace :deploy do
 
   task :stop, :roles => :node do
     puts "**Stop"
+    run "cd #{current_release}; sh bin/zkServer.sh stop"
   end
 
   desc "Restart Application"
