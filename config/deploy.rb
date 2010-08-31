@@ -35,7 +35,7 @@ set :domain, "cnguyen-md"
 # ROLES
 #========================
 role :node, "cnguyen-md", "hyan-md"
-
+role :db, domain, :primary => true
 #========================
 # CUSTOM
 #========================
@@ -47,12 +47,19 @@ namespace :deploy do
 
   task :stop, :roles => :node do
     puts "**Stop"
-    run "cd #{current_release}; sh bin/zkServer.sh stop"
+    run "cd #{current_release}; sudo sh bin/zkServer.sh stop"
   end
 
   desc "Restart Application"
   task :restart, :roles => :node do
     puts "**Restarted zookeeper"
-    run "cd #{current_release}; sh bin/zkServer.sh start"
+    run "cd #{current_release}; sudo sh bin/zkServer.sh start"
   end
+  
+  task :migrate, :roles => :node do
+    puts "**DUMMY Migrate"
+  end
+    
+  
+  
 end
