@@ -11,10 +11,20 @@ set :use_sudo, false
 set :runner, "cnguyen"
 set :stage, :production
 
-set :scm, :none
+
+set :repository, "git@github.com:chanhnguyen/Signal-Zookeeper.git"
+set :branch, "master"
+set :ssh_options, { :forward_agent => true }
+set :user, "cnguyen"
+set :runner, "cnguyen"
+
+
+set :scm, :git
+set :scm_command, "/usr/local/git/bin/git"
+
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-set :deploy_via, :copy
+set :deploy_via, :remote_cache
 set :copy_strategy, :export
 set :copy_cache, true
 
@@ -42,6 +52,7 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :node do
-    puts "**Restarted"
+    puts "**Restarted zookeeper"
+    run "cd #{current_release}; sh bin/zkServer.sh start"
   end
 end
