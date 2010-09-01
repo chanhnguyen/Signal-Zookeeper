@@ -17,7 +17,6 @@ set :ssh_options, { :forward_agent => true }
 set :user, "cnguyen"
 set :runner, "cnguyen"
 
-
 set :scm, :git
 set :scm_command, "/usr/local/git/bin/git"
 
@@ -27,7 +26,7 @@ set :deploy_via, :remote_cache
 set :copy_strategy, :export
 set :copy_cache, true
 
-set :deploy_to, "/opt/apps/#{application}"
+set :deploy_to, "#{application}/#{stage}"
 set :domain, "cnguyen-md"
 # ssh_options[:forward_agent] = true
 
@@ -40,7 +39,7 @@ role :db, domain, :primary => true
 # CUSTOM
 #========================
 
-set :data_dir, "/zookeeper/data/"
+set :data_dir, "#{application}/data/"
 
 
 namespace :deploy do
