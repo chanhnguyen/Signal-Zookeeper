@@ -39,7 +39,7 @@ role :db, domain, :primary => true
 # CUSTOM
 #========================
 
-set :data_dir, "#{application}/data/"
+set :data_dir, "/zookeeper/data/"
 
 
 namespace :deploy do
