@@ -39,10 +39,16 @@ role :db, domain, :primary => true
 #========================
 # CUSTOM
 #========================
+
+set :data_dir, "/zookeeper/data/"
+
+
 namespace :deploy do
 
   task :start, :roles => :node do
     puts "**Start"
+    puts "**Creating zookeeper data directory"
+    run "mkdir -p #{data_dir}"
   end
 
   task :stop, :roles => :node do
